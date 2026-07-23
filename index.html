@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ООО BCA — Помощь по подбору персонала для промышленных предприятий</title>
+<meta name="description" content="Помощь по подбору персонала. Подбираем, оформляем и сопровождаем иностранных работников для заводов и производств. Легально, по квотам РФ — от поиска кандидатов до выхода на объект.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine:#5a1220;
+    --wine-deep:#3d0c16;
+    --wine-soft:#6e1828;
+    --gold:#c6a05a;
+    --gold-bright:#d9b878;
+    --ink:#1a1416;
+    --paper:#f7f3ee;
+    --paper-dim:#ece4d9;
+    --line:rgba(198,160,90,.28);
+    --white:#fbf8f4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:.01em;line-height:1.1}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{
+    font-family:'Oswald',sans-serif;font-weight:500;letter-spacing:.32em;
+    text-transform:uppercase;font-size:13px;color:var(--gold);
+    display:inline-flex;align-items:center;gap:14px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold);opacity:.6}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(61,12,22,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(198,160,90,.18);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:12px;color:var(--white)}
+  .logo{height:46px;width:auto;display:block}
+  .foot .logo{height:54px}
+  .brand .mark{
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:26px;letter-spacing:.04em;
+    color:#fff;line-height:1;position:relative;padding:2px 0;
+  }
+  .brand .mark span{color:var(--gold)}
+  .brand small{display:block;font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:.34em;color:var(--gold);font-weight:500}
+  nav ul{display:flex;gap:0;list-style:none;align-items:center}
+  nav ul li{position:relative;display:flex;align-items:center}
+  nav ul li a{padding:0 22px}
+  nav ul li:not(:last-child)::after{content:"";width:1px;height:14px;background:rgba(198,160,90,.45);position:absolute;right:0;top:50%;transform:translateY(-50%)}
+  nav ul a{color:rgba(251,248,244,.78);font-size:14.5px;font-weight:500;transition:color .2s}
+  nav ul a:hover{color:var(--gold-bright)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--gold);color:var(--wine-deep);font-weight:700;font-size:14px;
+    padding:11px 22px;border-radius:2px;transition:background .2s,transform .2s;
+  }
+  .nav-cta:hover{background:var(--gold-bright);transform:translateY(-1px)}
+  .lang-switch{
+    margin-left:18px;background:transparent;border:1px solid rgba(198,160,90,.45);
+    color:var(--white);font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;letter-spacing:.05em;
+    padding:9px 13px;border-radius:2px;cursor:pointer;transition:border-color .2s,background .2s;
+  }
+  .lang-switch:hover{border-color:var(--gold);background:rgba(198,160,90,.1)}
+  .lang-switch .lang-sep{opacity:.4;margin:0 3px}
+  .lang-switch .lang-ru,.lang-switch .lang-en{transition:color .2s,opacity .2s;opacity:.5}
+  body[data-lang="ru"] .lang-switch .lang-ru{color:var(--gold-bright);opacity:1;font-weight:600}
+  body[data-lang="en"] .lang-switch .lang-en{color:var(--gold-bright);opacity:1;font-weight:600}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;z-index:60}
+  .burger span{width:24px;height:2px;background:var(--gold);display:block;transition:transform .25s,opacity .2s}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;color:var(--white);
+    background:
+      radial-gradient(120% 90% at 80% -10%, rgba(198,160,90,.14), transparent 55%),
+      linear-gradient(155deg,#4a0f1c 0%,#3d0c16 45%,#2c0810 100%);
+    overflow:hidden;
+  }
+  .hero::before,.hero::after{
+    content:"";position:absolute;pointer-events:none;
+    border:1px solid rgba(198,160,90,.16);
+    width:520px;height:520px;transform:rotate(45deg);
+  }
+  .hero::before{top:-180px;right:-160px}
+  .hero::after{bottom:-260px;right:60px;border-color:rgba(198,160,90,.1)}
+  .hero-inner{position:relative;z-index:2;padding:96px 0 104px;max-width:840px}
+  .hero h1{font-size:clamp(34px,5.2vw,60px);font-weight:700;margin:22px 0 26px}
+  .hero h1 b{color:var(--gold-bright);font-weight:700}
+  .hero .lead{font-size:clamp(17px,2vw,20px);color:rgba(251,248,244,.84);max-width:660px;font-weight:400}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:16px;
+    padding:16px 32px;border-radius:2px;transition:transform .2s,background .2s,box-shadow .2s;cursor:pointer;border:none;
+  }
+  .btn-gold{background:var(--gold);color:var(--wine-deep);box-shadow:0 10px 30px -12px rgba(198,160,90,.6)}
+  .btn-gold:hover{background:var(--gold-bright);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--white);border:1px solid rgba(198,160,90,.5)}
+  .btn-ghost:hover{border-color:var(--gold);background:rgba(198,160,90,.08)}
+  .hero-strip{
+    position:relative;z-index:2;border-top:1px solid rgba(198,160,90,.18);
+    display:grid;grid-template-columns:repeat(3,1fr);
+  }
+  .hero-strip div{padding:26px 24px;border-right:1px solid rgba(198,160,90,.12)}
+  .hero-strip div:last-child{border-right:none}
+  .hero-strip b{font-family:'Oswald',sans-serif;font-size:30px;color:var(--gold-bright);font-weight:600;display:block}
+  .hero-strip p{font-size:13.5px;color:rgba(251,248,244,.7);margin-top:4px}
+
+  /* ---------- SECTION BASE ---------- */
+  section{padding:84px 0}
+  .sec-head{max-width:680px;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(28px,3.6vw,40px);font-weight:600;margin:18px 0 0;color:var(--wine)}
+  .sec-lead{margin-top:18px;font-size:16.5px;line-height:1.65;color:#5b5256}
+
+  /* ---------- WHY US ---------- */
+  .why{background:var(--white)}
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .why-card{background:var(--white);padding:36px 28px;transition:background .25s}
+  .why-card:hover{background:var(--paper)}
+  .why-num{font-family:'Oswald',sans-serif;color:var(--gold);font-size:14px;letter-spacing:.2em;font-weight:600}
+  .why-card h3{font-size:21px;margin:16px 0 10px;color:var(--wine);font-weight:600}
+  .why-card p{font-size:15px;color:#5b5256}
+
+  /* ---------- VACANCIES ---------- */
+  .vac{background:var(--paper)}
+  .vac-top{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}
+  .field-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  .field-list li{
+    background:var(--white);border:1px solid var(--line);padding:18px 20px;
+    font-weight:600;color:var(--wine);font-size:16px;display:flex;align-items:center;gap:12px;
+  }
+  .field-list li::before{content:"";width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex:none}
+  .roles{margin-top:14px}
+  .roles h3{font-size:18px;color:var(--wine);margin-bottom:18px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .role-row{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:18px 0;border-bottom:1px solid var(--line);
+  }
+  .role-row:last-child{border-bottom:none}
+  .role-row span{font-size:17px;font-weight:600;color:var(--ink)}
+  .role-row a{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.04em;white-space:nowrap}
+  .role-row a:hover{color:var(--wine-soft)}
+
+  /* ---------- PROCESS ---------- */
+  .process{background:var(--wine-deep);color:var(--white);position:relative;overflow:hidden}
+  .process::before{content:"";position:absolute;top:-140px;left:-120px;width:420px;height:420px;border:1px solid rgba(198,160,90,.12);transform:rotate(45deg)}
+  .process .sec-head h2{color:#fff}
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;z-index:2}
+  .step{padding:0 22px;position:relative}
+  .step:not(:last-child)::after{content:"";position:absolute;top:26px;right:0;width:1px;height:60%;background:rgba(198,160,90,.2)}
+  .step-n{
+    width:54px;height:54px;border:1px solid var(--gold);color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;border-radius:50%;
+  }
+  .step h3{font-size:18px;margin:22px 0 8px;color:#fff;font-weight:600}
+  .step p{font-size:14px;color:rgba(251,248,244,.66)}
+
+  /* ---------- PLANTS ---------- */
+  .plants{background:var(--white)}
+  .plants-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+  .plant{
+    border:1px solid var(--line);padding:30px 26px;min-height:130px;
+    display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s,box-shadow .2s;
+  }
+  .plant:hover{transform:translateY(-3px);box-shadow:0 18px 40px -28px rgba(90,18,32,.4)}
+  .plant .tag{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--gold);font-weight:600}
+  .plant h3{font-size:19px;color:var(--wine);margin-top:auto;font-weight:600}
+  .plants-note{margin-top:30px;font-size:15px;color:#6b6065;max-width:620px}
+
+  /* ---------- CTA / CONTACTS ---------- */
+  .contact{
+    background:
+      radial-gradient(110% 120% at 0% 0%, rgba(198,160,90,.12), transparent 50%),
+      linear-gradient(160deg,#4a0f1c,#2c0810);
+    color:var(--white);
+  }
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .contact h2{font-size:clamp(28px,3.6vw,42px);color:#fff;margin:18px 0 18px;font-weight:600}
+  .contact .lead{color:rgba(251,248,244,.8);font-size:17px;max-width:440px}
+  .channels{margin-top:38px;display:flex;flex-direction:column;gap:2px}
+  .channel{
+    display:flex;align-items:center;gap:18px;padding:18px 0;
+    border-top:1px solid rgba(198,160,90,.18);transition:padding-left .2s;
+  }
+  .channel:last-child{border-bottom:1px solid rgba(198,160,90,.18)}
+  .channel:hover{padding-left:8px}
+  .channel .ic{
+    width:46px;height:46px;flex:none;border:1px solid rgba(198,160,90,.4);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--gold);
+  }
+  .channel small{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .channel b{font-size:18px;color:#fff;font-weight:600;font-family:'Manrope'}
+  .form-card{background:rgba(251,248,244,.04);border:1px solid rgba(198,160,90,.22);padding:38px}
+  .form-card h3{font-size:23px;color:#fff;margin-bottom:6px;font-weight:600}
+  .form-card p{font-size:14px;color:rgba(251,248,244,.6);margin-bottom:26px}
+  .form-card label{display:block;font-size:13px;color:rgba(251,248,244,.7);margin-bottom:7px;font-weight:600}
+  .form-card input,.form-card textarea{
+    width:100%;background:rgba(0,0,0,.18);border:1px solid rgba(198,160,90,.25);
+    color:#fff;padding:14px 16px;border-radius:2px;font-family:inherit;font-size:15px;margin-bottom:18px;transition:border-color .2s;
+  }
+  .form-card input:focus,.form-card textarea:focus{outline:none;border-color:var(--gold)}
+  .form-card input::placeholder,.form-card textarea::placeholder{color:rgba(251,248,244,.4)}
+  .form-card .btn-gold{width:100%;justify-content:center}
+  .form-msg{font-size:15px;font-weight:600;line-height:1.5;padding:8px 0;text-align:center}
+  .consent{font-size:12px;color:rgba(251,248,244,.5);margin-top:14px;text-align:center}
+  .consent a{color:var(--gold);text-decoration:underline}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#250710;color:rgba(251,248,244,.6);padding:44px 0}
+  .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+  .foot .brand small{color:var(--gold)}
+  .foot-links{display:flex;gap:26px;font-size:14px}
+  .foot-links a:hover{color:var(--gold-bright)}
+  .foot-copy{font-size:13px;color:rgba(251,248,244,.4);margin-top:18px;border-top:1px solid rgba(198,160,90,.12);padding-top:18px}
+
+  /* ---------- FLOAT BTNS ---------- */
+  .float{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;flex-direction:column;gap:12px}
+  .float a{
+    width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--gold);color:var(--wine-deep);box-shadow:0 10px 26px -8px rgba(0,0,0,.5);transition:transform .2s;
+  }
+  .float a:hover{transform:scale(1.08)}
+  .float a.wa{background:#25D366;color:#fff}
+  .float a.call{background:var(--gold);color:var(--wine-deep);font-size:22px}
+  .float a.tg{background:#229ED9;color:#fff}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:880px){
+    .nav-cta{display:none}
+    nav ul{
+      display:none;position:absolute;top:72px;left:0;right:0;
+      flex-direction:column;gap:0;background:#3d0c16;
+      padding:8px 24px 16px;border-bottom:1px solid rgba(198,160,90,.2);
+      box-shadow:0 20px 40px -20px rgba(0,0,0,.6);
+    }
+    nav ul.open{display:flex}
+    nav ul li{width:100%;display:block}
+    nav ul li a{display:block;padding:16px 0;font-size:16px}
+    nav ul li:not(:last-child)::after{
+      content:"";width:100%;height:1px;left:0;top:auto;bottom:0;transform:none;
+      background:linear-gradient(90deg,rgba(198,160,90,.4),rgba(198,160,90,.05));
+    }
+    .burger{display:flex}
+    .why-grid{grid-template-columns:1fr 1fr}
+    .vac-top{grid-template-columns:1fr;gap:40px}
+    .steps{grid-template-columns:1fr 1fr}
+    .step:not(:last-child)::after{display:none}
+    .plants-grid{grid-template-columns:1fr 1fr}
+    .contact-grid{grid-template-columns:1fr;gap:40px}
+    .hero-strip{grid-template-columns:1fr}
+    .hero-strip div{border-right:none;border-bottom:1px solid rgba(198,160,90,.12)}
+  }
+  @media(max-width:520px){
+    .why-grid,.field-list,.steps,.plants-grid{grid-template-columns:1fr}
+    section{padding:60px 0}
+    .hero-inner{padding:64px 0 72px}
+    .form-card{padding:26px 22px}
+  }
+
+
+
+  /* Плавное появление блоков при прокрутке */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:none}
+  .reveal-d1{transition-delay:.08s}
+  .reveal-d2{transition-delay:.16s}
+  .reveal-d3{transition-delay:.24s}
+
+  /* Уважение к настройке "уменьшить движение" */
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+    .reveal{opacity:1 !important;transform:none !important}
+  }
+</style>
+</head>
+<body data-lang="ru">
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="ООО BCA">
+      <svg class="logo" viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg" role="img">
+        <!-- верхняя линия слева -->
+        <line x1="14" y1="22" x2="74" y2="22" stroke="#c6a05a" stroke-width="2"/>
+        <!-- кружочки ООО -->
+        <circle cx="90" cy="22" r="6.5" fill="none" stroke="#c6a05a" stroke-width="2"/>
+        <circle cx="110" cy="22" r="5" fill="none" stroke="#c6a05a" stroke-width="2"/>
+        <circle cx="130" cy="22" r="6.5" fill="none" stroke="#c6a05a" stroke-width="2"/>
+        <!-- верхняя линия справа -->
+        <line x1="146" y1="22" x2="206" y2="22" stroke="#c6a05a" stroke-width="2"/>
+        <!-- буквы BCA -->
+        <text x="110" y="78" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="56" letter-spacing="1" fill="#ffffff">BCA</text>
+        <!-- нижние линии -->
+        <line x1="14" y1="92" x2="86" y2="92" stroke="#c6a05a" stroke-width="2"/>
+        <line x1="134" y1="92" x2="206" y2="92" stroke="#c6a05a" stroke-width="2"/>
+        <!-- галочка-стрелка вниз (двойная) -->
+        <polyline points="96,90 110,100 124,90" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+        <polyline points="98,84 110,93 122,84" fill="none" stroke="#c6a05a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#why" data-en="About">О нас</a></li>
+        <li><a href="#vac" data-en="Vacancies">Вакансии</a></li>
+        <li><a href="#process" data-en="Process">Как работаем</a></li>
+        <li><a href="#plants" data-en="Clients">Заводы</a></li>
+        <li><a href="#contact" data-en="Contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="nav-cta" data-en="Get in touch">Оставить заявку</a>
+    <button class="lang-switch" id="langSwitch" type="button" aria-label="Сменить язык">
+      <span class="lang-ru">RU</span><span class="lang-sep">/</span><span class="lang-en">EN</span>
+    </button>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top" style="padding:0">
+  <div class="wrap hero-inner">
+    <span class="eyebrow" data-en="Staff recruitment assistance">Помощь по подбору персонала</span>
+    <h1><span data-en="A reliable supplier of ">Надёжный поставщик </span><b data-en="foreign personnel">иностранного персонала</b><span data-en=" for industrial enterprises"> для промышленных предприятий</span></h1>
+    <p class="lead" style="margin-bottom:18px" data-en="We arrange the recruitment of workers from abroad in full compliance with Russian law and current quotas.">Организуем привлечение сотрудников из-за рубежа в соответствии с законодательством РФ и действующими квотами.</p>
+    <p class="lead" data-en="We source, process and support foreign workers for industrial enterprises. We handle the entire process — from finding candidates to their first day on site.">Подбираем, оформляем и сопровождаем иностранных работников для производственных предприятий. Берём на себя весь процесс — от поиска кандидатов до их выхода на объект.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-gold" data-en="Request a quote">Получить расчёт</a>
+      <a href="#vac" class="btn btn-ghost" data-en="View sectors">Смотреть направления</a>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0 24px">
+    <div class="hero-strip">
+      <div><b data-en="Within Russian quotas">По квотам РФ</b><p data-en="Recruitment strictly within the law">Трудоустройство строго в рамках законодательства</p></div>
+      <div><b data-en="Turnkey">Под ключ</b><p data-en="We handle documents and paperwork">Документы и оформление берём на себя</p></div>
+      <div><b data-en="All of Russia">Вся Россия</b><p data-en="Plants and rotational sites nationwide">Заводы и вахты по всей стране</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-en="Why choose us">Почему выбирают нас</span>
+      <h2 data-en="We cover your workforce needs without risk to your business">Закрываем потребность в рабочих руках без рисков для предприятия</h2>
+      <p class="sec-lead" data-en="We take on candidate sourcing for your open positions — running the initial search and conducting interviews.">Принимаем заявки на поиск и предоставление информации о кандидатах на замещение вакантных должностей. Осуществляем предварительный поиск и проводим собеседования.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-num">01</span>
+        <h3 data-en="Help with documents">Помогаем с документами</h3>
+        <p data-en="We handle all the paperwork: permits and migration registration. Your business bears no legal risk.">Берём на себя всю работу с документами: разрешения и миграционный учёт. Предприятие не несёт юридических рисков.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">02</span>
+        <h3 data-en="Fully legal, within quotas">Работаем легально, по квотам</h3>
+        <p data-en="We recruit workers from abroad in strict compliance with Russian law and current quotas.">Привлекаем сотрудников из-за рубежа в строгом соответствии с законодательством РФ и действующими квотами.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">03</span>
+        <h3 data-en="Plants and rotations across Russia">Заводы и вахты по всей России</h3>
+        <p data-en="We work with enterprises nationwide and deploy staff to sites in any region.">Сотрудничаем с предприятиями по всей стране. Выводим персонал на объект в нужном регионе.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">04</span>
+        <h3 data-en="Support and replacement">Сопровождение и замена</h3>
+        <p data-en="We support workers throughout their assignment and replace them quickly if needed — your production never stops.">Ведём сотрудников на всём периоде работы. Оперативно заменяем при необходимости — производство не простаивает.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VACANCIES -->
+<section class="vac" id="vac">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-en="Sectors">Направления</span>
+      <h2 data-en="We provide candidates for manufacturing and logistics">Предоставляем кандидатов для производства и логистики</h2>
+    </div>
+    <div class="vac-top">
+      <div>
+        <ul class="field-list">
+          <li data-en="Manufacturing">Производство</li>
+          <li data-en="Warehouses">Склады</li>
+          <li data-en="Packaging">Упаковка</li>
+          <li data-en="Food production">Пищевые предприятия</li>
+          <li data-en="Metalworking">Металлообработка</li>
+          <li data-en="Logistics">Логистика</li>
+        </ul>
+        <p class="plants-note" data-en="We select staff for your specific needs — from individual positions to staffing an entire shift.">Подбираем персонал под конкретную задачу предприятия — от единичных позиций до укомплектования целой смены.</p>
+      </div>
+      <div class="roles">
+        <h3 data-en="Roles we fill">Кого подбираем</h3>
+        <div class="role-row"><span data-en="General laborers">Разнорабочие</span><a href="#contact" data-en="Request →">Запросить →</a></div>
+        <div class="role-row"><span data-en="Line operators">Операторы линии</span><a href="#contact">Запросить →</a></div>
+        <div class="role-row"><span data-en="Order pickers">Комплектовщики</span><a href="#contact">Запросить →</a></div>
+        <div class="role-row"><span data-en="Loaders">Грузчики</span><a href="#contact">Запросить →</a></div>
+        <div class="role-row"><span data-en="Helpers">Подсобные рабочие</span><a href="#contact">Запросить →</a></div>
+        <div class="role-row"><span data-en="Welders">Сварщики</span><a href="#contact">Запросить →</a></div>
+        <div class="role-row"><span data-en="Seamstresses">Швеи</span><a href="#contact">Запросить →</a></div>
+        <div class="role-row"><span data-en="Housekeepers">Горничные</span><a href="#contact">Запросить →</a></div>
+        <div class="role-row"><span data-en="Agriculture">Сельское хозяйство</span><a href="#contact">Запросить →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Как мы работаем</span>
+      <h2 data-en="Four steps from request to first day on site">Четыре шага от заявки до выхода на объект</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><h3 data-en="Request">Заявка</h3><p data-en="You submit a request on the site or contact us directly.">Оставляете заявку на сайте или связываетесь с нами напрямую.</p></div>
+      <div class="step"><div class="step-n">2</div><h3 data-en="We call you">Менеджер звонит</h3><p data-en="We clarify the task, volume, region and working conditions.">Уточняем задачу, объём, регион и условия работы.</p></div>
+      <div class="step"><div class="step-n">3</div><h3 data-en="Selection">Подбор</h3><p data-en="We select candidates to your requirements and handle the paperwork.">Подбираем кандидатов под требования предприятия и оформляем документы.</p></div>
+      <div class="step"><div class="step-n">4</div><h3 data-en="First day">Выход на работу</h3><p data-en="Staff start on site. We provide support throughout the assignment.">Персонал выходит на объект. Ведём сопровождение на всём сроке.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANTS -->
+<section class="plants" id="plants">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Заводы</span>
+      <h2 data-en="Who we work with">С кем мы работаем</h2>
+    </div>
+    <div class="plants-grid">
+      <div class="plant"><span class="tag">Производство</span><h3 data-en="Machine-building plant">Машиностроительный завод</h3></div>
+      <div class="plant"><span class="tag" data-en="Food">Пищевое</span><h3 data-en="Food processing plant">Пищевой комбинат</h3></div>
+      <div class="plant"><span class="tag" data-en="Metal">Металл</span><h3>Металлообработка</h3></div>
+      <div class="plant"><span class="tag">Логистика</span><h3 data-en="Warehouse complex">Складской комплекс</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <span class="eyebrow">Контакты</span>
+        <h2 data-en="Send a request — we'll tailor the terms to your business">Оставьте заявку — рассчитаем условия под ваше предприятие</h2>
+        <p class="lead" data-en="We'll get back to you shortly, clarify your needs and propose a staffing solution.">Свяжемся в ближайшее время, уточним задачу и предложим решение по персоналу.</p>
+        <div class="channels">
+          <a href="https://wa.me/79804009317" class="channel" target="_blank" rel="noopener">
+            <span class="ic">WA</span>
+            <span><small>WhatsApp</small><b>+7 980 400 93 17</b></span>
+          </a>
+          <a href="tel:+79804009317" class="channel">
+            <span class="ic">☎</span>
+            <span><small data-en="Phone">Телефон</small><b>+7 980 400 93 17</b></span>
+          </a>
+          <a href="mailto:000bcahr@gmail.com" class="channel">
+            <span class="ic">@</span>
+            <span><small data-en="Email">Почта</small><b>000bcahr@gmail.com</b></span>
+          </a>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3 data-en="Staffing request">Заявка на персонал</h3>
+        <p data-en="Fill out the form — a manager will contact you.">Заполните форму — менеджер свяжется с вами.</p>
+        <form id="leadForm" action="https://formspree.io/f/mojzgjgq" method="POST">
+          <label for="n" data-en="Name">Имя</label>
+          <input id="n" name="Имя" type="text" placeholder="Как к вам обращаться" required>
+          <label for="p">Телефон</label>
+          <input id="p" name="Телефон" type="tel" placeholder="+7 (___) ___-__-__" required>
+          <label for="m">Сообщение</label>
+          <textarea id="m" name="Сообщение" rows="3" placeholder="Сколько человек, какие специальности, регион"></textarea>
+          <input type="hidden" name="_subject" value="Новая заявка с сайта BCA">
+          <button type="submit" class="btn btn-gold" data-en="Send request">Отправить заявку</button>
+        </form>
+        <p class="form-msg" id="formMsg" style="display:none"></p>
+        <p class="consent" data-en='By clicking the button, you agree to the <a href="privacy.html" target="_blank">personal data processing policy</a>.'>Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank">политикой обработки персональных данных</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="#top" class="brand" aria-label="ООО BCA">
+        <svg class="logo" viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg" role="img">
+          <line x1="14" y1="22" x2="74" y2="22" stroke="#c6a05a" stroke-width="2"/>
+          <circle cx="90" cy="22" r="6.5" fill="none" stroke="#c6a05a" stroke-width="2"/>
+          <circle cx="110" cy="22" r="5" fill="none" stroke="#c6a05a" stroke-width="2"/>
+          <circle cx="130" cy="22" r="6.5" fill="none" stroke="#c6a05a" stroke-width="2"/>
+          <line x1="146" y1="22" x2="206" y2="22" stroke="#c6a05a" stroke-width="2"/>
+          <text x="110" y="78" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="56" letter-spacing="1" fill="#ffffff">BCA</text>
+          <line x1="14" y1="92" x2="86" y2="92" stroke="#c6a05a" stroke-width="2"/>
+          <line x1="134" y1="92" x2="206" y2="92" stroke="#c6a05a" stroke-width="2"/>
+          <polyline points="96,90 110,100 124,90" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+          <polyline points="98,84 110,93 122,84" fill="none" stroke="#c6a05a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <div class="foot-links">
+        <a href="#why">О нас</a>
+        <a href="#vac">Вакансии</a>
+        <a href="#plants">Заводы</a>
+        <a href="#contact">Контакты</a>
+      </div>
+    </div>
+    <div class="foot-copy" data-en="© 2026 BCA LLC. Supply of foreign personnel for industrial enterprises. Recruitment in compliance with Russian law.">© 2026 ООО BCA. Поставка иностранного персонала для промышленных предприятий. Привлечение в соответствии с законодательством РФ.</div>
+  </div>
+</footer>
+
+<!-- FLOATING -->
+<div class="float">
+  <a href="https://wa.me/79804009317" class="wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+  <a href="tel:+79804009317" class="call" aria-label="Позвонить">☎</a>
+  <!-- TELEGRAM: раскомментируйте и впишите ник, когда будет готов
+  <a href="https://t.me/your_username" class="tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+  -->
+</div>
+
+<script>
+  // Бургер-меню: открытие и закрытие по одной кнопке
+  var burger = document.getElementById('burger');
+  var menu = document.querySelector('nav ul');
+  burger.addEventListener('click', function(){
+    menu.classList.toggle('open');
+    burger.classList.toggle('open');
+  });
+  // Клик по пункту меню — закрываем
+  document.querySelectorAll('nav ul a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      burger.classList.remove('open');
+    });
+  });
+
+  // Отправка формы через Formspree без перезагрузки страницы
+  var form = document.getElementById('leadForm');
+  var msg = document.getElementById('formMsg');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var orig = btn.textContent;
+      btn.textContent = 'Отправляем...';
+      btn.disabled = true;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {'Accept': 'application/json'}
+      }).then(function(r){
+        if(r.ok){
+          form.style.display = 'none';
+          msg.style.display = 'block';
+          msg.style.color = '#d9b878';
+          msg.textContent = 'Заявка отправлена. Менеджер свяжется с вами в ближайшее время.';
+        } else {
+          btn.textContent = orig; btn.disabled = false;
+          msg.style.display = 'block';
+          msg.style.color = '#e8a0a0';
+          msg.textContent = 'Не удалось отправить. Напишите нам в WhatsApp или позвоните.';
+        }
+      }).catch(function(){
+        btn.textContent = orig; btn.disabled = false;
+        msg.style.display = 'block';
+        msg.style.color = '#e8a0a0';
+        msg.textContent = 'Не удалось отправить. Напишите нам в WhatsApp или позвоните.';
+      });
+    });
+  }
+  // Переключение языков RU / EN
+  (function(){
+    var btn = document.getElementById('langSwitch');
+    if(!btn) return;
+
+    // placeholder'ы переводим отдельно (у них нет вложенного текста)
+    var placeholders = [
+      {sel:'#n', en:'Your name'},
+      {sel:'#m', en:'How many people, which roles, region'}
+    ];
+
+    function setLang(lang){
+      // тексты элементов с data-en
+      document.querySelectorAll('[data-en]').forEach(function(el){
+        if(el.getAttribute('data-ru') === null){
+          el.setAttribute('data-ru', el.textContent); // запоминаем оригинал один раз
+        }
+        el.textContent = (lang === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-ru');
+      });
+      // placeholder'ы
+      placeholders.forEach(function(p){
+        var el = document.querySelector(p.sel);
+        if(!el) return;
+        if(!el.getAttribute('data-ph-ru')){
+          el.setAttribute('data-ph-ru', el.getAttribute('placeholder') || '');
+        }
+        el.setAttribute('placeholder', (lang === 'en') ? p.en : el.getAttribute('data-ph-ru'));
+      });
+      document.body.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      try{ localStorage.setItem('bca_lang', lang); }catch(e){}
+    }
+
+    btn.addEventListener('click', function(){
+      var cur = document.body.getAttribute('data-lang');
+      setLang(cur === 'en' ? 'ru' : 'en');
+    });
+
+    // восстановить выбор
+    var saved = null;
+    try{ saved = localStorage.getItem('bca_lang'); }catch(e){}
+    if(saved === 'en'){ setLang('en'); }
+  })();
+
+  (function(){
+    // помечаем элементы, которые будут проявляться
+    var targets = [];
+    document.querySelectorAll('.sec-head, .why-card, .field-list li, .roles, .step, .plant, .form-card, .channels, .hero-strip > div').forEach(function(el){
+      el.classList.add('reveal');
+      targets.push(el);
+    });
+    // лёгкая каскадность для групп карточек
+    function stagger(selector){
+      document.querySelectorAll(selector).forEach(function(el,i){
+        var d = (i % 3) + 1;
+        el.classList.add('reveal-d'+d);
+      });
+    }
+    stagger('.why-grid .why-card');
+    stagger('.plants-grid .plant');
+    stagger('.steps .step');
+
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+      targets.forEach(function(t){ io.observe(t); });
+    } else {
+      // старый браузер — просто показываем всё
+      targets.forEach(function(t){ t.classList.add('visible'); });
+    }
+  })();
+</script>
+</body>
+</html>
